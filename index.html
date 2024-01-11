@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>福袋模擬</title>
+    <script>
+      // 米迦勒翅膀
+      // X1機率:8.00%
+      // 詭夜蝠翼
+      // X1機率:7.50%
+      // 虎紋蝶翼
+      // X1機率:8.00%
+      // 海藍羽翼
+      // X1機率:7.50%
+      // 熾紅羽翼
+      // X1機率:7.50%
+      // 四翼羽翼
+      // X1機率:7.50%
+      // 幻紫羽翼
+      // X1機率:7.50%
+      // 雙色蝶翼
+      // X1機率:8.00%
+      // 闇夜魔翼
+      // X1機率:7.50%
+      // 晨曦之翼
+      // X1機率:7.50%
+      // 繽粉羽翼
+      // X1機率:7.50%
+      // 海藍鰭翅
+      // X1機率:8.00%
+      // 霞霧羽翼
+      // X1機率:8.00%
+      const eightPercent = [
+        '霞霧羽翼',
+        '海藍鰭翅',
+        '雙色蝶翼',
+        '虎紋蝶翼',
+        '米迦勒翅膀',
+      ];
+      const sevenPercent = [
+        '繽粉羽翼',
+        '晨曦之翼',
+        '闇夜魔翼',
+        '幻紫羽翼',
+        '四翼羽翼',
+        '熾紅羽翼',
+        '海藍羽翼',
+        '詭夜蝠翼',
+      ];
+      let total = [];
+      // 計算每次福袋的花費
+      let cost = 0;
+      function simulateLuckyBag() {
+        let resultContainer = document.getElementById('result');
+        let wings = [];
+
+        for (let i = 0; i < 5; i++) {
+          // 8.00% 的機率獲得翅膀
+          let random = Math.random();
+          if (random <= 0.08) {
+            if (!wings.length) {
+              const count = Math.floor(Math.random() * 5);
+              wings.push(eightPercent[count]);
+            }
+          }
+        }
+
+        if (!wings.length) {
+          for (let i = 0; i < 8; i++) {
+            // 7.50% 的機率獲得翅膀
+            let random = Math.random();
+            if (random <= 0.075) {
+              if (!wings.length) {
+                const count = Math.floor(Math.random() * 8);
+                wings.push(sevenPercent[count]);
+              }
+            }
+          }
+          if (!wings.length) {
+            const count = Math.floor(Math.random() * 5);
+            wings.push(eightPercent[count]);
+          }
+        }
+        total = [...total, ...wings];
+        cost = cost + 3000;
+        // 顯示結果
+        resultContainer.innerHTML = `獲得的翅膀：${wings.join(
+          ', '
+        )}<br>花費：${cost}元<br><p>${total}</p>`;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>福袋模擬</h1>
+    <button onclick="simulateLuckyBag()">開啟福袋</button>
+    <div id="result"></div>
+  </body>
+</html>
